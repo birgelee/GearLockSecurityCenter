@@ -27,5 +27,23 @@ namespace GearLockSecurityCenter
                 textBox1.Text = folderBrowser.SelectedPath;
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FileSearcher sf = new FileSearcher();
+            sf.SearchFiles(textBox1.Text, textBox2.Text, excludedUser.Text);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
+
+            folderBrowser.RootFolder = Environment.SpecialFolder.MyComputer;
+            if (folderBrowser.ShowDialog() == DialogResult.OK)
+            {
+                textBox2.Text = folderBrowser.SelectedPath;
+            }
+        }
+
     }
 }

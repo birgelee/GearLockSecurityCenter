@@ -61,6 +61,15 @@ namespace GearLockSecurityCenter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string IgnoreFileJSON {
+            get {
+                return ResourceManager.GetString("IgnoreFileJSON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon KeyICON {
