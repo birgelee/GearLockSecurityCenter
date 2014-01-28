@@ -14,6 +14,8 @@ namespace GearLockSecurityCenter
         public SecureUsersBox()
         {
             InitializeComponent();
+            include.Checked = true;
+            exclude.Checked = false;
             textBox1.Text = @"C:\Users";
         }
 
