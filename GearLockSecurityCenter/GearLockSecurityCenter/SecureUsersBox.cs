@@ -31,7 +31,11 @@ namespace GearLockSecurityCenter
         private void button2_Click(object sender, EventArgs e)
         {
             FileSearcher sf = new FileSearcher();
-            sf.SearchFiles(textBox1.Text, textBox2.Text, excludedUser.Text);
+            sf.SearchFiles(textBox1.Text, textBox2.Text, excludedUser.Text, (s) => {
+                textBox3.Text = s; 
+                textBox3.Update();
+                
+            }, !exclude.Checked);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -44,6 +48,12 @@ namespace GearLockSecurityCenter
                 textBox2.Text = folderBrowser.SelectedPath;
             }
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
     }
 }

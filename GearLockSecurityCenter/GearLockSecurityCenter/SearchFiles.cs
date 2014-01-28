@@ -2,87 +2,80 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Linq;
 using GearLockSecurityCenter;
 namespace GearLockSecurityCenter
 {
     class FileSearcher
     {
-        List<string> filesFound = new List<string>();
-        public void SearchFiles(string rootPath, string dumpPath, string excludeUser)
-        {
-            this.rootPath = rootPath;
-            this.dumpPath = dumpPath;
-            this.execludeUser = excludeUser;
-            DirectoryInfo dir = new DirectoryInfo(rootPath);
-            
-            dir.GetFiles().ForEach((f) => ProcessFile(f));
-            foreach (DirectoryInfo user in dir.GetDirectories())
-            {
-                IEnumerable<string> files = GetFiles(user.FullName);
-                files.ForEach((f) => { ProcessFile(new FileInfo(f)); });
+        private List<KnownFile> knownFiles = new List<KnownFile>();
+        public delegate void LineWriter(string line);
 
+        public void SearchFiles(string rootPath, string dumpPath, string excludeUser, LineWriter output, bool include)
+        {
+            knownFiles = new List<KnownFile>();
+            DirectoryInfo dir = new DirectoryInfo(rootPath);
+            this.rootPath = rootPath;
+            dir.GetFiles().ForEach((f) => ProcessFile(f));
+            if (include)
+            {
+                output("Searching the User: " + excludeUser);
+                SearchDir(dir.GetDirectories().Where((d) => d.Name.Equals(excludeUser)).ElementAt(0));
+            }
+            else
+            {
+                dir.GetDirectories().ForEach((d) =>
+                {
+                    if (!d.Name.Equals(excludeUser))
+                    {
+                        output("Searching User: " + d.Name);
+                        SearchDir(d);
+                    }
+                    else
+                    {
+                        output("Skiping User: " + d.Name);
+                    }
+                });
+
+                output("File Search Complete");
 
             }
+        }
 
-            Console.WriteLine(filesFound);
+        public void SearchDir(DirectoryInfo dir)
+        {
+            try
+            {
+                dir.GetFiles().ForEach((f) => ProcessFile(f));
+                dir.GetDirectories().ForEach((d) => SearchDir(d));
+            }
+            catch (Exception ex)
+            {
+            }
         }
         string rootPath, dumpPath, execludeUser;
-        public void ProcessFile(FileInfo file)
+        private void ProcessFile(FileInfo file)
         {
-            if (!checkFile(file))
+            try
             {
-                filesFound.Add(file.Name);
-                //file.CopyTo(dumpPath +"\\"+ file.Name);
+                CheckFiles(file);
+                knownFiles.Add(new KnownFile(file, rootPath));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
-
-
-        List<string> knownFiles = new List<string>();
-        public bool checkFile(FileInfo file)
+        private bool CheckFiles(FileInfo file)
         {
-            if (knownFiles.Contains(file.Name))
+            try
             {
                 return true;
             }
-            return false;
-        }
-
-
-        private IEnumerable<string> GetFiles(string path)
-        {
-            Queue<string> queue = new Queue<string>();
-            queue.Enqueue(path);
-            while (queue.Count > 0)
+            catch (Exception ex)
             {
-                path = queue.Dequeue();
-                try
-                {
-                    foreach (string subDir in Directory.GetDirectories(path))
-                    {
-                        queue.Enqueue(subDir);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.Error.WriteLine(ex);
-                }
-                string[] files = null;
-                try
-                {
-                    files = Directory.GetFiles(path);
-                }
-                catch (Exception ex)
-                {
-                     
-                }
-                if (files != null)
-                {
-                    for (int i = 0; i < files.Length; i++)
-                    {
-                        yield return files[i];
-                    }
-                }
             }
+            return true;
         }
     }
 }

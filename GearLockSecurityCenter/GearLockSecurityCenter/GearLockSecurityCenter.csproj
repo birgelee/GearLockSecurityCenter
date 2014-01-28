@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayExtentions.cs" />
+    <Compile Include="ChangeGroupPolicies.cs" />
+    <Compile Include="KnownFile.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

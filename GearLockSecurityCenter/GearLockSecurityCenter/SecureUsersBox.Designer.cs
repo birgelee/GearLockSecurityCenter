@@ -37,6 +37,9 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.exclude = new System.Windows.Forms.RadioButton();
+            this.include = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // textBox1
@@ -67,9 +70,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(15, 279);
+            this.button2.Location = new System.Drawing.Point(15, 183);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(514, 23);
+            this.button2.Size = new System.Drawing.Size(514, 87);
             this.button2.TabIndex = 3;
             this.button2.Text = "Clear Out Users";
             this.button2.UseVisualStyleBackColor = true;
@@ -87,9 +90,10 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(13, 102);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 13);
+            this.label2.Size = new System.Drawing.Size(113, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Exclude User:";
+            this.label2.Text = "Exclude/Include User:";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // textBox2
             // 
@@ -117,11 +121,43 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(16, 282);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(562, 20);
+            this.textBox3.TabIndex = 9;
+            // 
+            // exclude
+            // 
+            this.exclude.AutoSize = true;
+            this.exclude.Location = new System.Drawing.Point(454, 104);
+            this.exclude.Name = "exclude";
+            this.exclude.Size = new System.Drawing.Size(93, 17);
+            this.exclude.TabIndex = 10;
+            this.exclude.TabStop = true;
+            this.exclude.Text = "Exclude Mode";
+            this.exclude.UseVisualStyleBackColor = true;
+            // 
+            // include
+            // 
+            this.include.AutoSize = true;
+            this.include.Location = new System.Drawing.Point(454, 128);
+            this.include.Name = "include";
+            this.include.Size = new System.Drawing.Size(90, 17);
+            this.include.TabIndex = 11;
+            this.include.TabStop = true;
+            this.include.Text = "Include Mode";
+            this.include.UseVisualStyleBackColor = true;
+            // 
             // SecureUsersBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(590, 314);
+            this.Controls.Add(this.include);
+            this.Controls.Add(this.exclude);
+            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox2);
@@ -149,6 +185,9 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.RadioButton exclude;
+        private System.Windows.Forms.RadioButton include;
 
     }
 }
