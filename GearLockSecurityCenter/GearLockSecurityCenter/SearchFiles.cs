@@ -87,16 +87,22 @@ namespace GearLockSecurityCenter
                 Console.WriteLine(ex);
             }
         }
+        //Returns true of the file is a microsoft file.
         private bool CheckFiles(FileInfo file)
         {
             try
             {
+                if (knownFiles.Any((f) => {
+                    return f.Name == file.Name && f.Path == KnownFile.TrimPath(file.FullName,rootPath, currentUser);
+                }))
+
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex);
             }
-            return true;
+            return false;
         }
     }
 }
