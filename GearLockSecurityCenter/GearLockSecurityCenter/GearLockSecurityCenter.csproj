@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,6 +52,13 @@
   <ItemGroup>
     <Compile Include="ArrayExtentions.cs" />
     <Compile Include="ChangeGroupPolicies.cs" />
+    <Compile Include="ChangeUserPasswords.cs" />
+    <Compile Include="ChangePasswordsBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePasswordsBox.Designer.cs">
+      <DependentUpon>ChangePasswordsBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="KnownFile.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -67,6 +75,9 @@
     <Compile Include="SecureUsersBox.Designer.cs">
       <DependentUpon>SecureUsersBox.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ChangePasswordsBox.resx">
+      <DependentUpon>ChangePasswordsBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

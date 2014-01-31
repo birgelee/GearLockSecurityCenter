@@ -24,7 +24,7 @@ namespace GearLockSecurityCenter
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var sb = new SecureUsersBox();
+            var sb = new SearchUserDirsBox();
             sb.TopLevel = false;
             sb.ShowInTaskbar = false;
             sb.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -47,6 +47,16 @@ namespace GearLockSecurityCenter
 
         private void button2_Click(object sender, EventArgs e)
         {
+
+            var sb = new ChangePasswordsBox();
+            sb.TopLevel = false;
+            sb.ShowInTaskbar = false;
+            sb.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            sb.Show();
+            sb.Dock = DockStyle.Fill;
+
+            this.Controls.Add(sb);
+            sb.BringToFront();
         }
     }
 }

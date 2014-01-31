@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace GearLockSecurityCenter
 {
-    public partial class SecureUsersBox : Form
+    public partial class SearchUserDirsBox : Form
     {
-        public SecureUsersBox()
+        public SearchUserDirsBox()
         {
             InitializeComponent();
             include.Checked = true;
@@ -33,8 +33,9 @@ namespace GearLockSecurityCenter
         private void button2_Click(object sender, EventArgs e)
         {
             FileSearcher sf = new FileSearcher();
-            sf.SearchFiles(textBox1.Text, textBox2.Text, excludedUser.Text, (s) => {
-                textBox3.Text = s; 
+            sf.SearchFiles(textBox1.Text, textBox2.Text, excludedUser.Text, (s) =>
+            {
+                textBox3.Text = s;
                 textBox3.Update();
                 
             }, !exclude.Checked);

@@ -1,6 +1,6 @@
 ﻿namespace GearLockSecurityCenter
 {
-    partial class SecureUsersBox
+    partial class SearchUserDirsBox
     {
         /// <summary>
         /// Required designer variable.
@@ -125,6 +125,7 @@
             // 
             this.textBox3.Location = new System.Drawing.Point(16, 282);
             this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(562, 20);
             this.textBox3.TabIndex = 9;
             // 
