@@ -5,17 +5,26 @@ using System.Text;
 using System.Linq;
 using GearLockSecurityCenter;
 using System.Web.Script.Serialization;
+using System.Threading;
 namespace GearLockSecurityCenter
 {
     public class FileSearcher
     {
-        private List<KnownFile> knownFiles = new List<KnownFile>(), foundFiles = new List<KnownFile>();
+        private Dictionary<string, bool> knownFiles;
+        private Dictionary<string, bool> foundFiles = new Dictionary<string,bool>();
         public delegate void LineWriter(string line);
         private string currentUser;
+
+        public void SearchFilesAsynk(string rootPath, string dumpPath, string excludeUser, LineWriter output, bool include)
+        {
+            Thread t = new Thread(() => SearchFiles(rootPath, dumpPath, excludeUser, output, include));
+            t.Start();
+        }
+
         public void SearchFiles(string rootPath, string dumpPath, string excludeUser, LineWriter output, bool include)
         {
             JavaScriptSerializer jss = new JavaScriptSerializer();
-            knownFiles = jss.Deserialize<List<KnownFile>>(Properties.Resources.IgnoreFileJSON);
+            knownFiles = jss.Deserialize<Dictionary<string, bool>>(Properties.Resources.IgnoreFileJSON);
             DirectoryInfo dir = new DirectoryInfo(rootPath);
             this.rootPath = rootPath;
             dir.GetFiles().ForEach((f) => ProcessFile(f));
@@ -41,12 +50,11 @@ namespace GearLockSecurityCenter
                     }
                 });
 
-                
+
 
             }
             output("File Search Complete");
 
-            
             File.WriteAllText("C:\\usersoutput.txt", jss.Serialize(foundFiles));
             //WriteXML();
             output("File Search Complete and Output Written");
@@ -60,7 +68,7 @@ namespace GearLockSecurityCenter
 
             System.IO.StreamWriter file = new System.IO.StreamWriter(
                 @"c:\SerializationOverview.xml");
-            writer.Serialize(file,knownFiles);
+            writer.Serialize(file, knownFiles);
             file.Close();
         }
         public void SearchDir(DirectoryInfo dir)
@@ -80,7 +88,9 @@ namespace GearLockSecurityCenter
             try
             {
                 if (!CheckFiles(file))
-                foundFiles.Add(new KnownFile(file, rootPath, currentUser));
+                {
+                    foundFiles.Add(KnownFile.TrimPath(file.FullName, rootPath, currentUser), true);
+                }
             }
             catch (Exception ex)
             {
@@ -92,11 +102,10 @@ namespace GearLockSecurityCenter
         {
             try
             {
-                if (knownFiles.Any((f) => {
-                    return f.Name == file.Name && f.Path == KnownFile.TrimPath(file.FullName,rootPath, currentUser);
-                }))
-
-                return true;
+                if (knownFiles[KnownFile.TrimPath(file.FullName, rootPath, currentUser)] == true)
+                {
+                    return true;
+                }
             }
             catch (Exception ex)
             {
