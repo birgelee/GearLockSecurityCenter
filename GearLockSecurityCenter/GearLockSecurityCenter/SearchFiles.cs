@@ -9,12 +9,13 @@ namespace GearLockSecurityCenter
 {
     public class FileSearcher
     {
-        private List<KnownFile> knownFiles = new List<KnownFile>();
+        private List<KnownFile> knownFiles = new List<KnownFile>(), foundFiles = new List<KnownFile>();
         public delegate void LineWriter(string line);
         private string currentUser;
         public void SearchFiles(string rootPath, string dumpPath, string excludeUser, LineWriter output, bool include)
         {
-            knownFiles = new List<KnownFile>();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            knownFiles = jss.Deserialize<List<KnownFile>>(Properties.Resources.IgnoreFileJSON);
             DirectoryInfo dir = new DirectoryInfo(rootPath);
             this.rootPath = rootPath;
             dir.GetFiles().ForEach((f) => ProcessFile(f));
@@ -45,8 +46,8 @@ namespace GearLockSecurityCenter
             }
             output("File Search Complete");
 
-            JavaScriptSerializer jss = new JavaScriptSerializer();
-            File.WriteAllText("C:\\usersoutput.txt", jss.Serialize(knownFiles));
+            
+            File.WriteAllText("C:\\usersoutput.txt", jss.Serialize(foundFiles));
             //WriteXML();
             output("File Search Complete and Output Written");
         }
@@ -78,8 +79,8 @@ namespace GearLockSecurityCenter
         {
             try
             {
-                CheckFiles(file);
-                knownFiles.Add(new KnownFile(file, rootPath, currentUser));
+                if (!CheckFiles(file))
+                foundFiles.Add(new KnownFile(file, rootPath, currentUser));
             }
             catch (Exception ex)
             {
@@ -92,7 +93,7 @@ namespace GearLockSecurityCenter
             {
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
             }
             return true;
