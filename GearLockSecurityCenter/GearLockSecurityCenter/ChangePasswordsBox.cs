@@ -20,8 +20,13 @@ namespace GearLockSecurityCenter
         private void button2_Click(object sender, EventArgs e)
         {
             ChangeUserPasswords passwordChanger = new ChangeUserPasswords();
-            passwordChanger.ChangePasswordsAsynk();
+            passwordChanger.ChangePasswordsAsynk(globalPassword.Text, excludeUserCheckBox.Checked ? excludeUser.Text : "", (s) => output.Text = s);
             
+
+        }
+
+        private void globalPassword_TextChanged(object sender, EventArgs e)
+        {
 
         }
 

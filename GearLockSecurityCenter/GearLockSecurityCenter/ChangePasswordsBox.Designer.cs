@@ -35,6 +35,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.excludeUser = new System.Windows.Forms.TextBox();
+            this.excludeUserCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // globalPassword
@@ -43,6 +45,7 @@
             this.globalPassword.Name = "globalPassword";
             this.globalPassword.Size = new System.Drawing.Size(417, 20);
             this.globalPassword.TabIndex = 0;
+            this.globalPassword.TextChanged += new System.EventHandler(this.globalPassword_TextChanged);
             // 
             // label1
             // 
@@ -55,9 +58,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(16, 51);
+            this.button2.Location = new System.Drawing.Point(12, 77);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(562, 66);
+            this.button2.Size = new System.Drawing.Size(562, 73);
             this.button2.TabIndex = 3;
             this.button2.Text = "Change User Passwords";
             this.button2.UseVisualStyleBackColor = true;
@@ -65,7 +68,7 @@
             // 
             // output
             // 
-            this.output.Location = new System.Drawing.Point(16, 140);
+            this.output.Location = new System.Drawing.Point(16, 169);
             this.output.Name = "output";
             this.output.ReadOnly = true;
             this.output.Size = new System.Drawing.Size(562, 20);
@@ -74,7 +77,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 124);
+            this.label2.Location = new System.Drawing.Point(16, 153);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(85, 13);
             this.label2.TabIndex = 10;
@@ -83,7 +86,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 167);
+            this.label3.Location = new System.Drawing.Point(16, 192);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 11;
@@ -93,19 +96,38 @@
             // 
             this.textBox1.AcceptsReturn = true;
             this.textBox1.AcceptsTab = true;
-            this.textBox1.Location = new System.Drawing.Point(16, 183);
+            this.textBox1.Location = new System.Drawing.Point(16, 208);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(559, 119);
+            this.textBox1.Size = new System.Drawing.Size(559, 94);
             this.textBox1.TabIndex = 12;
             // 
-            // SecureUsersBox
+            // excludeUser
+            // 
+            this.excludeUser.Location = new System.Drawing.Point(117, 51);
+            this.excludeUser.Name = "excludeUser";
+            this.excludeUser.Size = new System.Drawing.Size(417, 20);
+            this.excludeUser.TabIndex = 13;
+            // 
+            // excludeUserCheckBox
+            // 
+            this.excludeUserCheckBox.AutoSize = true;
+            this.excludeUserCheckBox.Location = new System.Drawing.Point(13, 51);
+            this.excludeUserCheckBox.Name = "excludeUserCheckBox";
+            this.excludeUserCheckBox.Size = new System.Drawing.Size(101, 17);
+            this.excludeUserCheckBox.TabIndex = 15;
+            this.excludeUserCheckBox.Text = "Exclude a User:";
+            this.excludeUserCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // ChangePasswordsBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(590, 314);
+            this.Controls.Add(this.excludeUserCheckBox);
+            this.Controls.Add(this.excludeUser);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -113,7 +135,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.globalPassword);
-            this.Name = "SecureUsersBox";
+            this.Name = "ChangePasswordsBox";
             this.Text = "Secure Users";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -129,6 +151,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox excludeUser;
+        private System.Windows.Forms.CheckBox excludeUserCheckBox;
 
     }
 }

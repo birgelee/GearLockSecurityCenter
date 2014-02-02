@@ -10,7 +10,7 @@ namespace GearLockSecurityCenter
 {
     public class FileSearcher
     {
-        private Dictionary<string, bool> knownFiles;
+        private Dictionary<string, bool> knownFiles = new Dictionary<string,bool>();
         private Dictionary<string, bool> foundFiles = new Dictionary<string,bool>();
         public delegate void LineWriter(string line);
         private string currentUser;
@@ -32,7 +32,14 @@ namespace GearLockSecurityCenter
             {
                 output("Searching the User: " + excludeUser);
                 currentUser = excludeUser;
-                SearchDir(dir.GetDirectories().Where((d) => d.Name.Equals(excludeUser)).ElementAt(0));
+                var usrdir = dir.GetDirectories().Where((d) => d.Name.Equals(excludeUser));
+                if (usrdir.Count() < 1)
+                {
+                    output("Error: no such user dir was found.");
+                    return;
+                }
+                
+                SearchDir(usrdir.ElementAt(0));
             }
             else
             {
@@ -102,10 +109,27 @@ namespace GearLockSecurityCenter
         {
             try
             {
-                if (knownFiles[KnownFile.TrimPath(file.FullName, rootPath, currentUser)] == true)
+
+                string trimmedPath = KnownFile.TrimPath(
+                    file.FullName, rootPath, currentUser);
+                if (trimmedPath.StartsWith("\\AppData\\Local\\Microsoft\\") || trimmedPath.StartsWith("\\AppData\\Local\\Temp\\" + currentUser + ".bmp") || trimmedPath.StartsWith("\\Contacts\\" + currentUser + ".contact") || trimmedPath.StartsWith("\\AppData\\Roaming\\Microsoft\\Protect\\"))
                 {
                     return true;
                 }
+                    
+                if (file.Name.StartsWith("NTUSER.DAT") || file.Name.StartsWith("desktop.ini"))
+                {
+                    return true;
+                }
+                if (knownFiles[trimmedPath] == true)
+                {
+                    return true;
+                }
+
+            }
+            catch (KeyNotFoundException ex)
+            {
+
             }
             catch (Exception ex)
             {
