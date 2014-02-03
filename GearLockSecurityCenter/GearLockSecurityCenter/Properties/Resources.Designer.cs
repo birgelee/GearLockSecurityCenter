@@ -61,11 +61,29 @@ namespace GearLockSecurityCenter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {&quot;desktop.ini&quot;:true,&quot;\\NTUSER.DAT&quot;:true,&quot;\\ntuser.dat.LOG1&quot;:true,&quot;\\ntuser.dat.LOG2&quot;:true,&quot;\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf&quot;:true,&quot;\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms&quot;:true,&quot;\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms&quot;:true,&quot;\\AppData\\Local\\GDIPFONTCACHEV1.DAT&quot;:true,&quot;\\AppData\\Local\\IconCache.db&quot;:true,&quot;\\AppData\\Local\\Adobe\\AAMUpdater\\1.0\\aamul.log&quot;:true,&quot;\\AppData\ [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to &quot;desktop.ini&quot;:true,&quot;\\NTUSER.DAT&quot;:true,&quot;\\ntuser.dat.LOG1&quot;:true,&quot;\\ntuser.dat.LOG2&quot;:true,&quot;\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TM.blf&quot;:true,&quot;\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000001.regtrans-ms&quot;:true,&quot;\\NTUSER.DAT{016888bd-6c6f-11de-8d1d-001e0bcde3ec}.TMContainer00000000000000000002.regtrans-ms&quot;:true,&quot;\\AppData\\Local\\GDIPFONTCACHEV1.DAT&quot;:true,&quot;\\AppData\\Local\\IconCache.db&quot;:true,&quot;\\AppData\\Local\\Adobe\\AAMUpdater\\1.0\\aamul.log&quot;:true,&quot;\\AppData\\ [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string IgnoreFileJSON {
             get {
                 return ResourceManager.GetString("IgnoreFileJSON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;\\Microsoft\\Assistance\\Client\\1.0\\en-US\\Help_CValidator.H1D&quot;:true,&quot;\\Microsoft\\Assistance\\Client\\1.0\\en-US\\Help_MKWD_AssetId.H1W&quot;:true,&quot;\\Microsoft\\Assistance\\Client\\1.0\\en-US\\Help_MKWD_BestBet.H1W&quot;:true,&quot;\\Microsoft\\Assistance\\Client\\1.0\\en-US\\Help_MTOC_help.H1H&quot;:true,&quot;\\Microsoft\\Assistance\\Client\\1.0\\en-US\\Help_MValidator.H1D&quot;:true,&quot;\\Microsoft\\Assistance\\Client\\1.0\\en-US\\Help_MValidator.Lck&quot;:true,&quot;\\Microsoft\\Assistance\\Client\\1.0\\en-US\\Help{9DAA54E8-CD95-4107-8E7F-BA [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string IgnoreFileJSONAllUsers {
+            get {
+                return ResourceManager.GetString("IgnoreFileJSONAllUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;\\Libraries\\RecordedTV.library-ms&quot;:true,&quot;\\Music\\Sample Music\\AlbumArtSmall.jpg&quot;:true,&quot;\\Music\\Sample Music\\AlbumArt_{0FB86398-F1BF-4F18-845A-71926CEAFFB2}_Large.jpg&quot;:true,&quot;\\Music\\Sample Music\\AlbumArt_{0FB86398-F1BF-4F18-845A-71926CEAFFB2}_Small.jpg&quot;:true,&quot;\\Music\\Sample Music\\AlbumArt_{5FA05D35-A682-4AF6-96F7-0773E42D4D16}_Large.jpg&quot;:true,&quot;\\Music\\Sample Music\\AlbumArt_{5FA05D35-A682-4AF6-96F7-0773E42D4D16}_Small.jpg&quot;:true,&quot;\\Music\\Sample Music\\Folder.jpg&quot;:true,&quot;\\Music\\Sample Music\\Kalim [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string IgnoreFileJSONDefaultUser {
+            get {
+                return ResourceManager.GetString("IgnoreFileJSONDefaultUser", resourceCulture);
             }
         }
         

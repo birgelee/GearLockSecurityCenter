@@ -24,7 +24,7 @@ namespace GearLockSecurityCenter
         public void SearchFiles(string rootPath, string dumpPath, string excludeUser, LineWriter output, bool include)
         {
             JavaScriptSerializer jss = new JavaScriptSerializer();
-            knownFiles = jss.Deserialize<Dictionary<string, bool>>(Properties.Resources.IgnoreFileJSON);
+            knownFiles = jss.Deserialize<Dictionary<string, bool>>("{" + Properties.Resources.IgnoreFileJSON + Properties.Resources.IgnoreFileJSONAllUsers + Properties.Resources.IgnoreFileJSONDefaultUser + "\"\":true}");
             DirectoryInfo dir = new DirectoryInfo(rootPath);
             this.rootPath = rootPath;
             dir.GetFiles().ForEach((f) => ProcessFile(f));
