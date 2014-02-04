@@ -40,6 +40,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.exclude = new System.Windows.Forms.RadioButton();
             this.include = new System.Windows.Forms.RadioButton();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -52,7 +53,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 59);
+            this.label1.Location = new System.Drawing.Point(12, 50);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 13);
             this.label1.TabIndex = 1;
@@ -151,11 +152,22 @@
             this.include.Text = "Include Mode";
             this.include.UseVisualStyleBackColor = true;
             // 
-            // SecureUsersBox
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(12, 12);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 17;
+            this.button4.Text = "Back";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // SearchUserDirsBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(590, 314);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.include);
             this.Controls.Add(this.exclude);
             this.Controls.Add(this.textBox3);
@@ -168,7 +180,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
-            this.Name = "SecureUsersBox";
+            this.Name = "SearchUserDirsBox";
             this.Text = "Secure Users";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -189,6 +201,7 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.RadioButton exclude;
         private System.Windows.Forms.RadioButton include;
+        private System.Windows.Forms.Button button4;
 
     }
 }

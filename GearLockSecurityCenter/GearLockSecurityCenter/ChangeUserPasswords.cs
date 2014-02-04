@@ -12,7 +12,7 @@ namespace GearLockSecurityCenter
     class ChangeUserPasswords
     {
 
-        int SCRIPT = 0x0001, ACCOUNTDISABLE = 0x0002, HOMEDIR_REQUIRED = 0x0008, LOCKOUT = 0x0010, PASSWD_NOTREQD = 0x0020, PASSWD_CANT_CHANGE = 0x0040, ENCRYPTED_TEXT_PWD_ALLOWED = 0x0080, TEMP_DUPLICATE_ACCOUNT = 0x0100, NORMAL_ACCOUNT = 0x0200, INTERDOMAIN_TRUST_ACCOUNT = 0x0800, WORKSTATION_TRUST_ACCOUNT = 0x1000, SERVER_TRUST_ACCOUNT = 0x2000, DONT_EXPIRE_PASSWORD = 0x10000, MNS_LOGON_ACCOUNT = 0x20000, SMARTCARD_REQUIRED = 0x40000, TRUSTED_FOR_DELEGATION = 0x80000, NOT_DELEGATED = 0x100000, USE_DES_KEY_ONLY = 0x200000, DONT_REQ_PREAUTH = 0x400000, PASSWORD_EXPIRED = 0x800000, TRUSTED_TO_AUTH_FOR_DELEGATION = 0x1000000;
+        const int SCRIPT = 0x0001, ACCOUNTDISABLE = 0x0002, HOMEDIR_REQUIRED = 0x0008, LOCKOUT = 0x0010, PASSWD_NOTREQD = 0x0020, PASSWD_CANT_CHANGE = 0x0040, ENCRYPTED_TEXT_PWD_ALLOWED = 0x0080, TEMP_DUPLICATE_ACCOUNT = 0x0100, NORMAL_ACCOUNT = 0x0200, INTERDOMAIN_TRUST_ACCOUNT = 0x0800, WORKSTATION_TRUST_ACCOUNT = 0x1000, SERVER_TRUST_ACCOUNT = 0x2000, DONT_EXPIRE_PASSWORD = 0x10000, MNS_LOGON_ACCOUNT = 0x20000, SMARTCARD_REQUIRED = 0x40000, TRUSTED_FOR_DELEGATION = 0x80000, NOT_DELEGATED = 0x100000, USE_DES_KEY_ONLY = 0x200000, DONT_REQ_PREAUTH = 0x400000, PASSWORD_EXPIRED = 0x800000, TRUSTED_TO_AUTH_FOR_DELEGATION = 0x1000000;
         public ChangeUserPasswords()
         {
 
@@ -28,9 +28,9 @@ namespace GearLockSecurityCenter
         }
         private void ChangePasswords(string masterPassword, string excludeUser)
         {
+            output("Connecting to local AD Server");
             DirectoryEntry localDirectory = new DirectoryEntry("WinNT://" + Environment.MachineName.ToString());
             DirectoryEntries users = localDirectory.Children;
-            Console.WriteLine("Starting user iteration");
             foreach (DirectoryEntry user in users)
             {
                 try
@@ -58,12 +58,10 @@ namespace GearLockSecurityCenter
                     Console.WriteLine("checked if exclude user");
                     output("Changing password on user " + user.Name);
                     user.Invoke("SetPassword", new object[] { masterPassword });
-                    Console.WriteLine("out put 1");
 
                     int val = (int)user.Properties["UserFlags"].Value;
-                    user.Properties["UserFlags"].Value = (val & ~DONT_EXPIRE_PASSWORD) & ~PASSWD_NOTREQD;
+                    user.Properties["UserFlags"].Value = (val & ~DONT_EXPIRE_PASSWORD);
                     
-                    Console.WriteLine("output 2");
                     user.CommitChanges();
                     user.Close();
                 }

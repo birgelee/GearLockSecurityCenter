@@ -11,8 +11,10 @@ namespace GearLockSecurityCenter
 {
     public partial class SearchUserDirsBox : Form
     {
-        public SearchUserDirsBox()
+        private GearLockSecurityCenter.MainForm.Navigator navigate;
+        public SearchUserDirsBox(GearLockSecurityCenter.MainForm.Navigator nav)
         {
+            this.navigate = nav;
             InitializeComponent();
             include.Checked = true;
             exclude.Checked = false;
@@ -37,7 +39,7 @@ namespace GearLockSecurityCenter
             {
                 textBox3.Text = s;
                 textBox3.Update();
-                
+
             }, !exclude.Checked);
         }
 
@@ -55,6 +57,11 @@ namespace GearLockSecurityCenter
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            navigate();
         }
 
 

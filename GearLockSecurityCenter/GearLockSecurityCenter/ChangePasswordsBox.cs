@@ -6,13 +6,16 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using GearLockSecurityCenter;
 
 namespace GearLockSecurityCenter
 {
     public partial class ChangePasswordsBox : Form
     {
-        public ChangePasswordsBox()
+        private GearLockSecurityCenter.MainForm.Navigator navigate;
+        public ChangePasswordsBox(GearLockSecurityCenter.MainForm.Navigator navigation)
         {
+            this.navigate = navigation;
             InitializeComponent();
         }
 
@@ -28,6 +31,11 @@ namespace GearLockSecurityCenter
         private void globalPassword_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            navigate();
         }
 
 

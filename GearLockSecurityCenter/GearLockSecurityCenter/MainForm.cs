@@ -10,6 +10,7 @@ namespace GearLockSecurityCenter
 {
     public partial class MainForm : Form
     {
+        public delegate void Navigator();
         public MainForm()
         {
             InitializeComponent();
@@ -24,7 +25,8 @@ namespace GearLockSecurityCenter
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var sb = new SearchUserDirsBox();
+            SearchUserDirsBox sb = null;
+            sb = new SearchUserDirsBox(() => { sb.Close(); sb.Dispose(); });
             sb.TopLevel = false;
             sb.ShowInTaskbar = false;
             sb.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -42,13 +44,14 @@ namespace GearLockSecurityCenter
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
 
-            var sb = new ChangePasswordsBox();
+            ChangePasswordsBox sb = null;
+            sb = new ChangePasswordsBox(() => { sb.Close(); sb.Dispose(); });
             sb.TopLevel = false;
             sb.ShowInTaskbar = false;
             sb.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
