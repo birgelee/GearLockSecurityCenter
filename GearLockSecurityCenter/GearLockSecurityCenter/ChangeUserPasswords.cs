@@ -17,10 +17,12 @@ namespace GearLockSecurityCenter
         {
 
         }
+        GearLockSecurityCenter.MainForm.Navigator forward;
         string masterPassword;
         GearLockSecurityCenter.FileSearcher.LineWriter output;
-        public void ChangePasswordsAsynk(string masterPassword, string excludeUser, GearLockSecurityCenter.FileSearcher.LineWriter output)
+        public void ChangePasswordsAsynk(string masterPassword, string excludeUser, GearLockSecurityCenter.FileSearcher.LineWriter output, GearLockSecurityCenter.MainForm.Navigator forward)
         {
+            this.forward = forward;
             this.masterPassword = masterPassword;
             this.output = output;
             Thread t = new Thread(() => ChangePasswords(masterPassword, excludeUser));
@@ -61,7 +63,6 @@ namespace GearLockSecurityCenter
 
                     int val = (int)user.Properties["UserFlags"].Value;
                     user.Properties["UserFlags"].Value = (val & ~DONT_EXPIRE_PASSWORD);
-                    
                     user.CommitChanges();
                     user.Close();
                 }
@@ -69,11 +70,41 @@ namespace GearLockSecurityCenter
                 {
                     output("Failed to change password or user settings on " + user.Name);
                     Console.WriteLine("Failed to change password or user settings on " + user.Name);
+                    Console.WriteLine(ex);
                 }
 
             }
             localDirectory.Close();
             output("Changed All User Passwords.");
         }
+        public List<GroupPrincipal> GetGroups(string userName)
+        {
+            List<GroupPrincipal> result = new List<GroupPrincipal>();
+
+            // establish domain context
+            PrincipalContext yourDomain = new PrincipalContext(ContextType.Machine);
+
+            // find your user
+            UserPrincipal user = UserPrincipal.FindByIdentity(yourDomain, userName);
+
+            // if found - grab its groups
+            if (user != null)
+            {
+                PrincipalSearchResult<Principal> groups = user.GetAuthorizationGroups();
+
+                // iterate over all groups
+                foreach (Principal p in groups)
+                {
+                    // make sure to add only group principals
+                    if (p is GroupPrincipal)
+                    {
+                        result.Add((GroupPrincipal)p);
+                    }
+                }
+            }
+
+            return result;
+        }
+
     }
 }

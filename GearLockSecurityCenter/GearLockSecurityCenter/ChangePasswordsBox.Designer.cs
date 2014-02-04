@@ -33,8 +33,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.output = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.excludeUser = new System.Windows.Forms.TextBox();
             this.excludeUserCheckBox = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -59,9 +57,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 104);
+            this.button2.Location = new System.Drawing.Point(12, 218);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(562, 73);
+            this.button2.Size = new System.Drawing.Size(562, 45);
             this.button2.TabIndex = 3;
             this.button2.Text = "Change User Passwords";
             this.button2.UseVisualStyleBackColor = true;
@@ -69,7 +67,7 @@
             // 
             // output
             // 
-            this.output.Location = new System.Drawing.Point(16, 196);
+            this.output.Location = new System.Drawing.Point(12, 282);
             this.output.Name = "output";
             this.output.ReadOnly = true;
             this.output.Size = new System.Drawing.Size(562, 20);
@@ -78,32 +76,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 180);
+            this.label2.Location = new System.Drawing.Point(13, 266);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(85, 13);
             this.label2.TabIndex = 10;
             this.label2.Text = "Running Output:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 219);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Report:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.AcceptsReturn = true;
-            this.textBox1.AcceptsTab = true;
-            this.textBox1.Location = new System.Drawing.Point(16, 235);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(559, 67);
-            this.textBox1.TabIndex = 12;
             // 
             // excludeUser
             // 
@@ -140,8 +117,6 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.excludeUserCheckBox);
             this.Controls.Add(this.excludeUser);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.output);
             this.Controls.Add(this.button2);
@@ -161,8 +136,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox output;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox excludeUser;
         private System.Windows.Forms.CheckBox excludeUserCheckBox;
         private System.Windows.Forms.Button button1;
